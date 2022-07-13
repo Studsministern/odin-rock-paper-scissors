@@ -17,10 +17,10 @@ function playRound(playerSelection, computerSelection) {
             console.log(`Tie! Both players chose ${playerSelection}.`);
             return 0;
         case 1:
-            console.log(`You win! ${playerSelection} beats ${computerSelection}.`);
+            console.log(`You win! ${firstLetterCapitalised(playerSelection)} beats ${computerSelection}.`);
             return 1;
         case 2:
-            console.log(`You lose! ${computerSelection} beats ${playerSelection}.`);
+            console.log(`You lose! ${firstLetterCapitalised(computerSelection)} beats ${playerSelection}.`);
             return -1;
         default:
             console.log("Something went wrong!");
@@ -58,6 +58,18 @@ function selectionName(selection) { // Convert number to a string
             console.log("Something went wrong!");
             return -1;
     }
+}
+
+function firstLetterCapitalised(input) { // Conert string to 
+    if(typeof input === "string") {
+        if(input.length > 1) {
+            firstLetter = input.charAt(0).toUpperCase();
+            restOfWord = input.substring(1).toLowerCase();
+            return firstLetter + restOfWord;
+        }
+        return input.toUpperCase();
+    }
+    return;
 }
 
 // Player Selection (Do-while loop to only allow valid inputs)

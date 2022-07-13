@@ -6,7 +6,11 @@ function game() {
         let scoreChange = 0;
         
         do {
+<<<<<<< HEAD
             scoreChange = playOneRound(round, playerSelection, computerSelection);
+=======
+            scoreChange = playOneRound(round);
+>>>>>>> 0bb73d2 (Clarify functions, function names and comments)
         } while (scoreChange === 0); // Replay rounds with a tie!
         
         if(scoreChange > 0) { playerScore++; }   // Positive => Player won the round

@@ -1,27 +1,18 @@
 function playRound(playerSelection, computerSelection) {
-    let playerSelectionIndex = selectionIndex(playerSelection);
-    console.log('Player index: ' + playerSelectionIndex);
-
-    let computerSelectionIndex = selectionIndex(computerSelection);
-    console.log('Computer index: ' + computerSelectionIndex);
-
-    let diff = playerSelectionIndex - computerSelectionIndex;
-    console.log('Diff: ' + diff);
-
-    let modulu = diff % 3;
-    console.log('Modulu 3: ' + modulu);
-    if (modulu < 0) { modulu += 3; }
+    // Modulo operation to compare selections
+    let modulo = (selectionIndex(playerSelection) - selectionIndex(computerSelection)) % 3;
+    if (modulo < 0) { modulo += 3; } // Positive values only requires 3 cases (0, 1, 2) instead of 5 (-2, -1, 0, 1, 2)
     
-    switch (modulu) {
+    switch (modulo) { // Compare selections and returns points for the player
         case 0:
             console.log(`Tie! Both players chose ${playerSelection}.`);
-            return 0;
+            return 0; // 0 points if it is a tie
         case 1:
             console.log(`You win! ${firstLetterCapitalised(playerSelection)} beats ${computerSelection}.`);
-            return 1;
+            return 1; // 1 point if the player wins
         case 2:
             console.log(`You lose! ${firstLetterCapitalised(computerSelection)} beats ${playerSelection}.`);
-            return -1;
+            return -1; // -1 point if the player loses
         default:
             console.log('Something went wrong!');
             return 0;
@@ -77,11 +68,11 @@ let playerSelection;
 do {
     playerSelection = prompt('Rock, paper or scissors? ', '').toLowerCase();
 } while(!(playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors'));
-console.log('Player chose: ' + playerSelection);
+console.log('Player chose ' + playerSelection);
 
 // Computer Selection
 let computerSelection = selectionName(computerPlay());
-console.log('Computer chose: ' + computerSelection);
+console.log('Computer chose ' + computerSelection);
 
 // Playing a round
 console.log(playRound(playerSelection, computerSelection));

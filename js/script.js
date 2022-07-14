@@ -6,14 +6,17 @@ function playOneRound(playerSelection) {
     // Logs the result and updates points
     switch (compareSelections(playerSelection, computerSelection)) {
         case 0:
-            console.log(`Tie! Both players chose ${playerSelection}. Play the round again!`);
+            roundText.textContent = 'Tie!'
+            outputText.textContent = `Both players chose ${playerSelection}. Play the round again!`;
             break;
         case 1:
-            console.log(`You win! ${capitalizeFirstLetterOfString(playerSelection)} beats ${computerSelection}.`);
+            roundText.textContent = 'You won the round!'
+            outputText.textContent = `${capitalizeFirstLetterOfString(playerSelection)} beats ${computerSelection}.`;
             updateScore(1); // 1 point if the player wins
             break;
         case 2:
-            console.log(`You lose! ${capitalizeFirstLetterOfString(computerSelection)} beats ${playerSelection}.`);
+            roundText.textContent = 'You lost the round!'
+            outputText.textContent = `${capitalizeFirstLetterOfString(computerSelection)} beats ${playerSelection}.`;
             updateScore(-1); // -1 point if the player loses
             break;
         default:
@@ -33,12 +36,17 @@ function randomizeComputerSelection() { // Random choice between rock (1), paper
 }
 
 function updateScore(scoreChange) {
+    if(scoreChange === 0) return;
+    
     if(scoreChange > 0) { playerScore++; }   // Positive => Player won the round
     if(scoreChange < 0) { computerScore++; } // Negative => Computer won the round
 
+    scoreText.textContent = `${playerScore} | ${computerScore}`;
+
     if(checkGameOver()) { // Someone has won!
-        if(playerScore > computerScore) { console.log(`You won the game! The score was ${playerScore}|${computerScore}.`); } // Win message
-                                   else { console.log(`You lost the game! The score was ${playerScore}|${computerScore}.`); } // Lose message
+        if(playerScore > computerScore) { roundText.textContent = 'You won the game!'; } // Win message
+                                   else { roundText.textContent = 'You lost the game!'; } // Lose message
+        
     }
 }
 
@@ -90,6 +98,9 @@ let playerScore = 0;
 let computerScore = 0;
 
 const buttons = document.querySelectorAll('.buttons > *');
+const scoreText = document.querySelector('.score-text');
+const roundText = document.querySelector('.round-text');
+const outputText = document.querySelector('.output-text');
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {

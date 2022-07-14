@@ -47,11 +47,27 @@ function updateScore(scoreChange) {
         if(playerScore > computerScore) { roundText.textContent = 'You won the game!'; } // Win message
                                    else { roundText.textContent = 'You lost the game!'; } // Lose message
         
+        toggleButtonsHidden();
     }
 }
 
 function checkGameOver() {
     return playerScore + computerScore >= 5;
+}
+
+function restartGame() {
+    playerScore = 0;
+    computerScore = 0;
+    scoreText.textContent = '0 | 0';
+    roundText.textContent = 'Best of 5 rounds! Who will win?';
+    outputText.textContent = '';
+    toggleButtonsHidden();
+}
+
+function toggleButtonsHidden() {
+    buttons.forEach((button) => {
+        button.hidden = button.hidden ? false : true;
+    });
 }
 
 function convertSelectionNameToIndex(selection) {
@@ -104,6 +120,11 @@ const outputText = document.querySelector('.output-text');
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
+        if(button.id === "restart") {
+            restartGame();
+            return;
+        }
+        
         playOneRound(button.id);
     });
 });

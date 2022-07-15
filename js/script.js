@@ -120,7 +120,7 @@ const outputText = document.querySelector('.output-text');
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        if(button.id === "restart") {
+        if(button.id === 'restart') {
             restartGame();
             return;
         }
